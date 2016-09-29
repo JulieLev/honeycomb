@@ -22,4 +22,14 @@ describe 'Delivery' do
       expect(express_delivery.type).to eq 'Express'
     end
   end
+
+  context '#cost' do
+    it 'has a standard cost' do
+      expect(standard_delivery.cost).to eq Delivery::STANDARD_DELIVERY_COST
+    end
+
+    it 'has an express delivery cost' do
+      expect(express_delivery.cost).to eq Delivery::EXPRESS_DELIVERY_COST
+    end
+  end
 end

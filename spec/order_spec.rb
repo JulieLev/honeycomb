@@ -45,9 +45,13 @@ describe 'Order' do
     end
   end
 
-  # context 'when order warrants discounts' do
-  #   before do
-  #     2.times { order.add_delivery(express_delivery) }
-  #   end
-  # end
+  context 'when order warrants discounts' do
+    before do
+      2.times { order.add_delivery(express_delivery) }
+    end
+
+    it 'applies discount if more than two deliveries are Express' do
+      expect(order.express_delivery_discount_cost).to eq 40 - (2 * Order::EXPRESS_DELIVERY_VOLUME_DISCOUNT)
+    end
+  end
 end

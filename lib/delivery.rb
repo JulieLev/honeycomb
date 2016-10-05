@@ -2,8 +2,8 @@ class Delivery
 
   attr_reader :id, :type, :cost
 
-  STANDARD_DELIVERY_COST = 10
-  EXPRESS_DELIVERY_COST = 20
+  STANDARD_DELIVERY_COST = 10.00
+  EXPRESS_DELIVERY_COST = 20.00
 
   def initialize(id, material, broadcaster, type = 'Standard')
     @id = id

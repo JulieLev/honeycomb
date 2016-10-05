@@ -1,6 +1,6 @@
 class Order
 
-  EXPRESS_DELIVERY_VOLUME_DISCOUNT = 5 # Discount is a $ amount
+  EXPRESS_DELIVERY_VOLUME_DISCOUNT = 5.00 # Discount is a $ amount
   OVER_30_DISCOUNT = 10 # Discount is a percentage %
 
   attr_reader :deliveries, :cost_after_express_delivery_discount

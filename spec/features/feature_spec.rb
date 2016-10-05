@@ -3,7 +3,7 @@ require 'order'
 require 'material'
 require 'broadcaster'
 
-describe 'feature: discounts give expected values' do
+describe 'Feature: discounts give expected values' do
   material_wnp = Material.new("WNP/SWCL001/01")
   material_zdw = Material.new("ZDW/EOWW005/010")
 
@@ -20,7 +20,7 @@ describe 'feature: discounts give expected values' do
   express_delivery_3 = Delivery.new( '105', material_zdw, discovery, "Express")
   express_delivery_4 = Delivery.new( '106', material_zdw, viacom, "Express")
 
-  context 'three standard and one express delivery' do
+  context 'order has three standard and one express delivery' do
     order = Order.new
 
     order.add_delivery(standard_delivery_1)
@@ -29,11 +29,11 @@ describe 'feature: discounts give expected values' do
     order.add_delivery(express_delivery_1)
 
     it 'should have an order total of $45' do
-      expect(order.final_cost).to eq 45
+      expect(order.final_discounted_cost).to eq 45
     end
   end
 
-  context 'three express deliveries' do
+  context 'order has three express deliveries' do
     order = Order.new
 
     order.add_delivery(express_delivery_2)
@@ -41,7 +41,7 @@ describe 'feature: discounts give expected values' do
     order.add_delivery(express_delivery_4)
 
     it 'should have an order total of $40.50' do
-      expect(order.final_cost).to eq 40.5
+      expect(order.final_discounted_cost).to eq 40.5
     end
   end
 end

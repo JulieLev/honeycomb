@@ -27,12 +27,6 @@ describe 'Order' do
       end
     end
 
-    describe '#full_cost' do
-      it 'has a full cost from the sum of the delivery costs' do
-        expect(order.full_cost).to eq 20
-      end
-    end
-
     describe '#standard_delivery_count' do
       it 'knows how many standard deliveries are in the order' do
         expect(order.standard_delivery_count).to eq 2
@@ -42,6 +36,24 @@ describe 'Order' do
     describe '#express_delivery_count' do
       it 'knows how many express deliveries are in the order' do
         expect(order.express_delivery_count).to eq 0
+      end
+    end
+
+    describe '#full_cost' do
+      it 'has a full cost from the sum of the delivery costs' do
+        expect(order.full_cost).to eq 20
+      end
+    end
+
+    describe '#cost_after_express_delivery_discount' do
+      it 'does not apply express delivery discount' do
+        expect(order.cost_after_express_delivery_discount).to eq 20
+      end
+    end
+
+    describe '#final_discounted_cost' do
+      it 'does not apply over $30 discount' do
+        expect(order.final_discounted_cost).to eq 20
       end
     end
   end
@@ -56,7 +68,7 @@ describe 'Order' do
     end
 
     it 'applies discount if order totals more than $30' do
-      expect(order.final_cost).to eq order.cost_after_express_delivery_discount * (100 - Order::OVER_30_DISCOUNT)/100
+      expect(order.final_discounted_cost).to eq order.cost_after_express_delivery_discount * (100 - Order::OVER_30_DISCOUNT)/100
     end
   end
 end

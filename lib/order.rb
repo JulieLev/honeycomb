@@ -9,10 +9,6 @@ class Order
     @deliveries = deliveries
   end
 
-  def full_cost
-    @deliveries.inject(0) { |sum, delivery| sum + delivery.cost }
-  end
-
   def add_delivery(delivery)
     @deliveries << delivery
   end
@@ -25,11 +21,15 @@ class Order
     @deliveries.count { |delivery| delivery.type == 'Express' }
   end
 
+  def full_cost
+    @deliveries.inject(0) { |sum, delivery| sum + delivery.cost }
+  end
+
   def cost_after_express_delivery_discount
     express_delivery_count >= 2 ? full_cost - (EXPRESS_DELIVERY_VOLUME_DISCOUNT * express_delivery_count) : full_cost
   end
 
-  def final_cost
+  def final_discounted_cost
     cost_after_express_delivery_discount >= 30 ? cost_after_express_delivery_discount * (100 - OVER_30_DISCOUNT)/100 : cost_after_express_delivery_discount
   end
 end

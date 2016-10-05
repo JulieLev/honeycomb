@@ -1,9 +1,10 @@
 require 'order'
+
 describe 'Order' do
 
   subject(:order) { Order.new }
   let(:standard_delivery) { double :delivery, cost: 10, type: 'Standard' }
-  let(:express_delivery) { double :delivery, cost: 20, type: 'Express' }
+  let(:express_delivery) { double :delivery, cost: 20, type: "Express" }
 
   context 'when initialized' do
     it 'has no deliveries' do
@@ -51,7 +52,11 @@ describe 'Order' do
     end
 
     it 'applies discount if more than two deliveries are Express' do
-      expect(order.express_delivery_discount_cost).to eq 40 - (2 * Order::EXPRESS_DELIVERY_VOLUME_DISCOUNT)
+      expect(order.cost_after_express_delivery_discount).to eq 40 - (2 * Order::EXPRESS_DELIVERY_VOLUME_DISCOUNT)
+    end
+
+    it 'applies discount if order totals more than $30' do
+      expect(order.final_cost).to eq order.cost_after_express_delivery_discount * (100 - Order::OVER_30_DISCOUNT)/100
     end
   end
 end
